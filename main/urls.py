@@ -9,7 +9,7 @@ admin.site.site_header = "MyPC - панель администратора"
 admin.site.site_title = "ADMIN"
 admin.site.index_title = "Вы вошли в панель администратора!"
 
-urlpatterns = website_urls + api_urls + staticfiles_urlpatterns()
+urlpatterns = website_urls + staticfiles_urlpatterns()
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
