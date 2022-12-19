@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    {% load static %}
+      <div class="mainda">
+    <div class="main" style="max-width: 1300px; margin: 0 auto;">
+      <div class="main-item sale">
+          <h1 class="sale-title" style="color: black;">Магазин компьютеров и комплектующих</h1>
+          <p class="sale-description" style="color: black;">Комплектующие по самым выгодным ценам.</p>
+          <a class="btn1  " href="/items/0/all" style="width: 192px;">Перейти в каталог</a>
+      </div>
+     <img class="box-image"src="{%  static 'images/comp.png' %}" alt="Comp">
+  </div>
+  </div>
+    <div class="site-section site-blocks-2">
+      <div class="container">
+        <div class="col-md-7 site-section-heading text-center pt-4" style="margin: 0 auto;">
+          <h2>Категории</h2>
+        </div>
+            {% for i in categories %}
+                    <div class="row">
+                        {% for j in i %}
+                          <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+                            <a class="block-2-item" href="/items/{{ j.pk }}/all">
+                              <figure class="image">
+                                <img src="media/{{ j.image }}" alt="" class="img-fluid">
+                              </figure>
+                              <div class="text">
+                                <h3>{{ j.name }}</h3>
+                              </div>
+                            </a>
+                          </div>
+                        {% endfor %}
+                    </div>
+            {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Котёнок{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="container">
+        <img src="{%  static '/images/kitten.gif' %}">
+    </div>
+{% endblock %}

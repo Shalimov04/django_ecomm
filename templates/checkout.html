@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="site-section">
+      <div class="container">
+        <form method="POST" action="/checkout">
+        <div class="row">
+          <div class="col-md-6 mb-5 mb-md-0">
+            <h2 class="h3 mb-3 text-black">Информация для получения</h2>
+            <div class="p-3 p-lg-5 border">
+              <div class="form-group row" style="flex-wrap:nowrap; flex-direction: column">
+                <div class="col-md-8 mx-auto">
+                    {% csrf_token %}
+                    {{ form }}
+                    <br/>
+                    <br/>
+                </div>
+                      <br/>
+                  <p>Адрес самовывоза: </br> <strong>{{ address }}</strong></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Ваш заказ</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Товар</th>
+                      <th>Итог</th>
+                    </thead>
+                    <tbody>
+                    {% for ordered_item in order.ordereditem_set.all %}
+                      <tr>
+                        <td>{{ ordered_item.item.name }}<strong class="mx-2">x</strong> {{ ordered_item.count }}</td>
+                        <td>{{ ordered_item.cost }}</td>
+                      </tr>
+                    {% endfor %}
+                      <tr>
+                        <td class="text-black font-weight-bold"><strong>Всего</strong></td>
+                        <td class="text-black font-weight-bold"><strong>{{ order.get_cart_total|floatformat:2 }}₽</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-lg py-3 btn-block" type="submit">Разместить заказ</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+{% endblock %}

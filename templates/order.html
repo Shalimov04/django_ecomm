@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Товар{% endblock %}
+
+{% block content %}
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span class="icon-check_circle display-3 text-success"></span>
+            <h2 class="display-3 text-black">Заказ #{{ order.pk }}</h2>
+              <h3 class="text-black">Состав: </h3>
+              {% for item in items %}
+                <p class="lead mb-5">* {{ item.item.name }}, {{ item.count }} шт. {{ item.cost }}₽</p>
+              {% endfor %}
+            <p><a href="/" class="btn btn-sm btn-primary">Вернуться</a></p>
+            <p>Назовите номер заказа работнику магазина.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

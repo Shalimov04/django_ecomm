@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Товары{% endblock %}
+
+{% block content %}
+    <div class="site-section">
+      <div class="container">
+
+        <div class="row mb-5">
+          <div class="col-md-9 order-2">
+
+            <div class="row">
+              <div class="col-md-12 mb-5">
+                <div class="float-md-left mb-4"><h2 class="text-black h5">Каталог</h2></div>
+                <div class="d-flex">
+                  <div class="dropdown mr-1 ml-md-auto">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-5">
+            {% for item in items %}
+              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                <div class="block-4 text-center border">
+                  <figure class="block-4-image">
+                    <a href="/item/{{ item.pk }}"><img src="/media/{{ item.image }}" alt="Image placeholder" class="img-fluid"></a>
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="/item/{{ item.pk }}">{{ item.name }}</a></h3>
+                    <p class="mb-0">{% if item.category != None %}{{ item.category }}{% else %}-{% endif %}</p>
+                    <p class="text-primary font-weight-bold">{{ item.price|floatformat:2 }}₽</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+      </div>
+    </div>
+    <div class="col-md-3 order-1 mb-5 mb-md-0">
+        <div class="border p-4 rounded mb-4">
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Категории</h3>
+                <ul class="list-unstyled mb-0">
+                    {% for category in categories %} <li class="mb-1"><a href="/items/{{ category.pk }}/{{ current.condition }}" class="d-flex"><span>{{  category.name }}</span> <span class="text-black ml-auto">*</span></a></li> {% endfor %}
+                    <li class="mb-1"><a href="/items/0/{{ current.condition }}" class="d-flex"><span><strong>Все товары</strong></span> <span class="text-black ml-auto">*</span></a></li>
+                </ul>
+        </div>
+
+        <div class="border p-4 rounded mb-4">
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Состояние товара</h3>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-1"><a href="/items/{{ current.category }}/new" class="d-flex"><span>Новый</span> <span class="text-black ml-auto">*</span></a></li>
+                    <li class="mb-1"><a href="/items/{{ current.category }}/used" class="d-flex"><span>Б/у</span> <span class="text-black ml-auto">*</span></a></li>
+                    <li class="mb-1"><a href="/items/{{ current.category }}/discount" class="d-flex"><span>Уценка</span> <span class="text-black ml-auto">*</span></a></li>
+                    <li class="mb-1"><a href="/items/{{ current.category }}/all" class="d-flex"><span><strong>Любое</strong></span> <span class="text-black ml-auto">*</span></a></li>
+                </ul>
+        </div>
+    </div>
+        </div></div></div>
+{% endblock %}
